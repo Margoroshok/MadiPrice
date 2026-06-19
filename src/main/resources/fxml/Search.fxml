@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.mediprice.controller.SearchController"
+            styleClass="root-pane"
+            prefWidth="1100" prefHeight="700">
+
+    <!-- TOP BAR -->
+    <top>
+        <VBox>
+            <Region style="-fx-background-color:#10B981;" prefHeight="3" minHeight="3" maxHeight="3" maxWidth="Infinity"/>
+            <HBox styleClass="top-bar" spacing="14" alignment="CENTER_LEFT">
+                <padding><Insets top="13" right="22" bottom="13" left="22"/></padding>
+                <Label text="⬡" style="-fx-font-size:22px; -fx-text-fill:#10B981;"/>
+                <Label text="MediPrice" styleClass="nav-title"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label fx:id="userLabel" styleClass="user-badge"/>
+                <Button fx:id="backButton" text="← Back" styleClass="btn-ghost-small" onAction="#handleBack"/>
+            </HBox>
+        </VBox>
+    </top>
+
+    <!-- MAIN CONTENT -->
+    <center>
+        <VBox spacing="16">
+            <padding><Insets top="22" right="22" bottom="22" left="22"/></padding>
+
+            <!-- Search Bar -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Find Medicines" styleClass="section-title"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label fx:id="statusLabel" styleClass="status-label"/>
+            </HBox>
+
+            <HBox spacing="10" alignment="CENTER">
+                <TextField fx:id="searchField" promptText="Search by name, e.g. Paracetamol..."
+                           styleClass="text-field" HBox.hgrow="ALWAYS" prefHeight="40"/>
+                <Button fx:id="searchButton" text="Search" styleClass="btn-primary"
+                        onAction="#handleSearch" prefHeight="40"/>
+                <Button fx:id="reserveButton" text="Reserve" styleClass="btn-accent"
+                        onAction="#handleReserve" visible="false" disable="true" prefHeight="40"/>
+            </HBox>
+
+            <!-- Split: Medicines | Prices -->
+            <SplitPane dividerPositions="0.42" VBox.vgrow="ALWAYS">
+
+                <VBox spacing="10">
+                    <HBox alignment="CENTER_LEFT" spacing="8">
+                        <Label text="Medicines" styleClass="table-header-label"/>
+                    </HBox>
+                    <TableView fx:id="medicinesTable" VBox.vgrow="ALWAYS" styleClass="data-table">
+                        <columns>
+                            <TableColumn fx:id="medNameCol" text="Name" prefWidth="180"/>
+                            <TableColumn fx:id="medManufacturerCol" text="Manufacturer" prefWidth="140"/>
+                            <TableColumn fx:id="medDescCol" text="Description" prefWidth="200"/>
+                        </columns>
+                        <placeholder>
+                            <Label text="No medicines found" style="-fx-text-fill:#3D5A6F; -fx-font-size:13px;"/>
+                        </placeholder>
+                    </TableView>
+                </VBox>
+
+                <VBox spacing="10">
+                    <HBox alignment="CENTER_LEFT" spacing="10">
+                        <Label text="Prices &amp; Availability" styleClass="table-header-label"/>
+                        <Label fx:id="selectedMedicineLabel" styleClass="selected-badge"/>
+                    </HBox>
+                    <TableView fx:id="pricesTable" VBox.vgrow="ALWAYS" styleClass="data-table">
+                        <columns>
+                            <TableColumn fx:id="pricePharmacyCol" text="Pharmacy" prefWidth="170"/>
+                            <TableColumn fx:id="priceAddressCol" text="Address" prefWidth="190"/>
+                            <TableColumn fx:id="pricePriceCol" text="Price" prefWidth="100"/>
+                            <TableColumn fx:id="priceQuantityCol" text="Stock" prefWidth="110"/>
+                        </columns>
+                        <placeholder>
+                            <Label text="Select a medicine to see prices" style="-fx-text-fill:#3D5A6F; -fx-font-size:13px;"/>
+                        </placeholder>
+                    </TableView>
+                </VBox>
+
+            </SplitPane>
+        </VBox>
+    </center>
+
+    <!-- STATUS BAR -->
+    <bottom>
+        <HBox styleClass="bottom-bar" alignment="CENTER_LEFT">
+            <padding><Insets top="7" right="18" bottom="7" left="18"/></padding>
+            <Label text="Prices sorted lowest first · Select a medicine to compare pharmacies" styleClass="hint-label"/>
+        </HBox>
+    </bottom>
+</BorderPane>

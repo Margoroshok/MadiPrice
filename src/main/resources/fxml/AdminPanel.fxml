@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.mediprice.controller.AdminPanelController"
+            styleClass="root-pane"
+            prefWidth="1100" prefHeight="720">
+
+    <top>
+        <VBox>
+            <Region style="-fx-background-color:#F59E0B;" prefHeight="3" minHeight="3" maxHeight="3" maxWidth="Infinity"/>
+            <HBox styleClass="admin-bar" spacing="14" alignment="CENTER_LEFT">
+                <padding><Insets top="13" right="22" bottom="13" left="22"/></padding>
+                <Label text="⬡" style="-fx-font-size:22px; -fx-text-fill:#F59E0B;"/>
+                <Label text="MediPrice" styleClass="nav-title"/>
+                <Label text="ADMIN" styleClass="admin-badge"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="Search View" styleClass="btn-ghost-small" onAction="#handleSearchMedicines"/>
+                <Button text="Sign Out" styleClass="btn-ghost-small" onAction="#handleLogout"/>
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <TabPane styleClass="main-tab-pane" tabClosingPolicy="UNAVAILABLE">
+
+            <!-- MEDICINES -->
+            <Tab text="Medicines">
+                <VBox spacing="16">
+                    <padding><Insets top="22" right="22" bottom="22" left="22"/></padding>
+
+                    <HBox alignment="CENTER_LEFT" spacing="10">
+                        <Label text="Manage Medicines" styleClass="section-title"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Button text="+ Add Medicine" styleClass="btn-primary" onAction="#handleAddMedicine"/>
+                        <Button text="Edit" styleClass="btn-secondary" onAction="#handleEditMedicine"/>
+                        <Button text="Delete" styleClass="btn-danger" onAction="#handleDeleteMedicine"/>
+                        <Button text="Refresh" styleClass="btn-ghost-small" onAction="#handleRefresh"/>
+                    </HBox>
+
+                    <TableView fx:id="medicinesTable" VBox.vgrow="ALWAYS" styleClass="data-table">
+                        <columns>
+                            <TableColumn fx:id="medIdCol" text="ID" prefWidth="50"/>
+                            <TableColumn fx:id="medNameCol" text="Name" prefWidth="220"/>
+                            <TableColumn fx:id="medMfgCol" text="Manufacturer" prefWidth="180"/>
+                            <TableColumn fx:id="medDescCol" text="Description" prefWidth="400"/>
+                        </columns>
+                        <placeholder>
+                            <Label text="No medicines in database" style="-fx-text-fill:#3D5A6F;"/>
+                        </placeholder>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+            <!-- PHARMACIES -->
+            <Tab text="Pharmacies">
+                <VBox spacing="16">
+                    <padding><Insets top="22" right="22" bottom="22" left="22"/></padding>
+
+                    <HBox alignment="CENTER_LEFT" spacing="10">
+                        <Label text="Manage Pharmacies" styleClass="section-title"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Button text="+ Add Pharmacy" styleClass="btn-primary" onAction="#handleAddPharmacy"/>
+                        <Button text="Edit" styleClass="btn-secondary" onAction="#handleEditPharmacy"/>
+                        <Button text="Delete" styleClass="btn-danger" onAction="#handleDeletePharmacy"/>
+                        <Button text="Refresh" styleClass="btn-ghost-small" onAction="#handleRefresh"/>
+                    </HBox>
+
+                    <TableView fx:id="pharmaciesTable" VBox.vgrow="ALWAYS" styleClass="data-table">
+                        <columns>
+                            <TableColumn fx:id="pharmIdCol" text="ID" prefWidth="50"/>
+                            <TableColumn fx:id="pharmNameCol" text="Name" prefWidth="200"/>
+                            <TableColumn fx:id="pharmCityCol" text="City" prefWidth="120"/>
+                            <TableColumn fx:id="pharmAddressCol" text="Address" prefWidth="240"/>
+                            <TableColumn fx:id="pharmLatCol" text="Lat" prefWidth="100"/>
+                            <TableColumn fx:id="pharmLonCol" text="Lon" prefWidth="100"/>
+                        </columns>
+                        <placeholder>
+                            <Label text="No pharmacies in database" style="-fx-text-fill:#3D5A6F;"/>
+                        </placeholder>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+            <!-- RESERVATIONS -->
+            <Tab text="All Reservations">
+                <VBox spacing="16">
+                    <padding><Insets top="22" right="22" bottom="22" left="22"/></padding>
+
+                    <HBox alignment="CENTER_LEFT" spacing="10">
+                        <Label text="All Reservations" styleClass="section-title"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Button text="✓ Confirm" styleClass="btn-accent" onAction="#handleConfirmReservation"/>
+                        <Button text="✓ Complete" styleClass="btn-primary" onAction="#handleCompleteReservation"/>
+                        <Button text="Cancel" styleClass="btn-danger" onAction="#handleCancelReservation"/>
+                        <Button text="Refresh" styleClass="btn-ghost-small" onAction="#handleRefresh"/>
+                    </HBox>
+
+                    <TableView fx:id="reservationsTable" VBox.vgrow="ALWAYS" styleClass="data-table">
+                        <columns>
+                            <TableColumn fx:id="resIdCol" text="ID" prefWidth="50"/>
+                            <TableColumn fx:id="resUserCol" text="User" prefWidth="130"/>
+                            <TableColumn fx:id="resMedCol" text="Medicine" prefWidth="180"/>
+                            <TableColumn fx:id="resPharmCol" text="Pharmacy" prefWidth="160"/>
+                            <TableColumn fx:id="resQtyCol" text="Qty" prefWidth="60"/>
+                            <TableColumn fx:id="resDateCol" text="Date" prefWidth="140"/>
+                            <TableColumn fx:id="resStatusCol" text="Status" prefWidth="110"/>
+                        </columns>
+                        <placeholder>
+                            <Label text="No reservations found" style="-fx-text-fill:#3D5A6F;"/>
+                        </placeholder>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+        </TabPane>
+    </center>
+
+    <bottom>
+        <HBox styleClass="bottom-bar" alignment="CENTER_LEFT">
+            <padding><Insets top="7" right="18" bottom="7" left="18"/></padding>
+            <Label fx:id="statusLabel" styleClass="hint-label"/>
+        </HBox>
+    </bottom>
+</BorderPane>

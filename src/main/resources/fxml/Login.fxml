@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.geometry.Insets?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.mediprice.controller.LoginController"
+           styleClass="root-pane"
+           prefWidth="900" prefHeight="600">
+
+    <VBox alignment="CENTER" spacing="0" maxWidth="400">
+        <VBox.margin><Insets top="40" bottom="40"/></VBox.margin>
+
+        <VBox styleClass="card" spacing="28" alignment="CENTER">
+            <padding><Insets top="44" right="52" bottom="44" left="52"/></padding>
+
+            <!-- Logo / Title -->
+            <VBox alignment="CENTER" spacing="8">
+                <!-- Green pill icon -->
+                <HBox alignment="CENTER" spacing="0">
+                    <Label text="⬡" style="-fx-font-size:44px; -fx-text-fill:#10B981;"/>
+                </HBox>
+                <Label fx:id="titleLabel" text="MediPrice" styleClass="app-title"/>
+                <Label text="Medicine Price Comparison" styleClass="subtitle"/>
+            </VBox>
+
+            <!-- Divider -->
+            <Rectangle fill="rgba(255,255,255,0.06)" height="1" width="296"/>
+
+            <!-- Login Form -->
+            <VBox spacing="16">
+                <VBox spacing="5">
+                    <Label text="USERNAME" styleClass="field-label"/>
+                    <TextField fx:id="usernameField" promptText="Enter your username" styleClass="text-field"/>
+                </VBox>
+                <VBox spacing="5">
+                    <Label text="PASSWORD" styleClass="field-label"/>
+                    <PasswordField fx:id="passwordField" promptText="Enter your password" styleClass="text-field"/>
+                </VBox>
+
+                <Label fx:id="errorLabel" styleClass="error-label" wrapText="true" maxWidth="Infinity" visible="false"/>
+            </VBox>
+
+            <!-- Buttons -->
+            <VBox spacing="10">
+                <Button fx:id="loginButton" text="Sign In" styleClass="btn-primary"
+                        onAction="#handleLogin" maxWidth="Infinity"/>
+                <Button fx:id="registerButton" text="Create Account" styleClass="btn-secondary"
+                        onAction="#handleRegister" maxWidth="Infinity"/>
+                <Button fx:id="guestButton" text="Browse as Guest" styleClass="btn-ghost"
+                        onAction="#handleGuest" maxWidth="Infinity"/>
+            </VBox>
+
+        </VBox>
+    </VBox>
+</StackPane>
